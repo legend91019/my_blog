@@ -1,0 +1,30 @@
+site_name: 天庭
+site_description: "基于 MkDocs Material 搭建的个人博客"
+site_author: 王勇顺
+
+theme:
+  name: material
+  language: zh
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: pink
+  features:
+    - navigation.instant
+    - navigation.tabs
+    - content.code.copy
+    - search.highlight
+
+nav:
+  - 首页: index.md
+  - 关于: about.md
+
+plugins:
+  - search
+
+markdown_extensions:
+  - admonition
+  - codehilite
+  - toc:
+      permalink: true
+
