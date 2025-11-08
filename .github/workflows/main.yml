@@ -1,15 +1,16 @@
-# 文件路径：.github/workflows/ci.yml
+# .github/workflows/ci.yml
 
 name: Deploy Docs
 
 on:
   push:
     branches:
-      - main  # 监听 main 分支的推送事件
+      - main
 
+# 确保顶层有这个 permissions，它现在是必须的
 permissions:
   contents: read
-  pages: write
+  pages: write # 授予 pages 写入权限
   id-token: write
 
 jobs:
@@ -20,7 +21,12 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: 3.x
-      - run: pip install mkdocs-material
+      # ⚠️ 注意：如果这里失败，可能是因为您没有在本地提交 mkdocs.yml
+      # 如果您本地还没有安装 Python 和 MkDocs，可以改为：
+      # - run: pip install mkdocs mkdocs-material
+
+      - name: Install Dependencies
+        run: pip install mkdocs-material
 
       - name: Deploy to GitHub Pages
         run: mkdocs gh-deploy --force
