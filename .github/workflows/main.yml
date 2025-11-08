@@ -1,0 +1,26 @@
+# 文件路径：.github/workflows/ci.yml
+
+name: Deploy Docs
+
+on:
+  push:
+    branches:
+      - main  # 监听 main 分支的推送事件
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: 3.x
+      - run: pip install mkdocs-material
+
+      - name: Deploy to GitHub Pages
+        run: mkdocs gh-deploy --force
